@@ -1,7 +1,7 @@
 <?php
 /**
  * @package     Joomla.Administrator
- * @subpackage  mod_logged
+ * @subpackage  mod_logged_plus
  *
  * @copyright   Copyright (C) 2005 - 2017 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
@@ -10,11 +10,11 @@
 defined('_JEXEC') or die;
 
 /**
- * Helper for mod_logged
+ * Helper for mod_logged_plus
  *
  * @since  1.5
  */
-abstract class ModLoggedHelper
+abstract class ModLoggedPlusHelper
 {
 	/**
 	 * Get a list of logged users.
@@ -30,7 +30,7 @@ abstract class ModLoggedHelper
 		$db    = JFactory::getDbo();
 		$user  = JFactory::getUser();
 		$query = $db->getQuery(true)
-			->select('s.time, s.client_id, u.id, u.name, u.username')
+			->select('s.time, s.client_id, u.id, u.name, u.username, u.lastvisitDate')
 			->from('#__session AS s')
 			->join('LEFT', '#__users AS u ON s.userid = u.id')
 			->where('s.guest = 0');
@@ -73,6 +73,6 @@ abstract class ModLoggedHelper
 	 */
 	public static function getTitle($params)
 	{
-		return JText::plural('MOD_LOGGED_TITLE', $params->get('count'));
+		return JText::plural('MOD_LOGGED_PLUS_TITLE', $params->get('count'));
 	}
 }
